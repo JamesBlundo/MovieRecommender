@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recommendations - CineMatch</title>
+</head>
+<body>
+<h1>Recommendations</h1>
+
+<p>
+    <a href="/titles">Back to Library</a>
+</p>
+
+<div th:if="${#lists.isEmpty(recs)}">
+    <p>No recommendations yet.</p>
+    <p>Tip: rate a few titles first, then come back.</p>
+</div>
+
+<ul th:if="${!#lists.isEmpty(recs)}">
+    <li th:each="r : ${recs}">
+        <strong th:text="${r.title.name}"></strong>
+        (<span th:text="${r.title.type}"></span>,
+        <span th:text="${r.title.releaseYear}"></span>)
+        — Score: <span th:text="${r.score}"></span>
+        <br/>
+        <em>Why:</em>
+        <span th:if="${#lists.isEmpty(r.matchedGenres)}">No matched genres</span>
+        <span th:if="${!#lists.isEmpty(r.matchedGenres)}"
+              th:text="${#strings.listJoin(r.matchedGenres, ', ')}"></span>
+        <br/>
+        <a th:href="@{/titles/{id}(id=${r.title.id})}">View</a>
+    </li>
+</ul>
+</body>
+</html>

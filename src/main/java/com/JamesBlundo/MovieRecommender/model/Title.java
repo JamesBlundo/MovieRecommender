@@ -1,6 +1,7 @@
 package com.JamesBlundo.MovieRecommender.model;
 
-
+import java.util.HashSet;
+import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
@@ -55,4 +56,20 @@ public class Title {
     public void setYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
+
+    @ManyToMany
+    @JoinTable(
+            name = "title_genres",
+            joinColumns = @JoinColumn(name = "title_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<Genre> genres = new HashSet<>();
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
 }

@@ -32,6 +32,17 @@
         <div th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}"></div>
     </div>
 
+    <div>
+        <label>Genres:</label>
+        <div th:each="g : ${allGenres}">
+            <label>
+                <input type="checkbox" th:field="*{genreIds}" th:value="${g.id}" />
+                <span th:text="${g.name}"></span>
+            </label>
+        </div>
+    </div>
+
+
     <button type="submit">Create</button>
 </form>
 

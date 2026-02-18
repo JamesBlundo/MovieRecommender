@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title.name} + ' - CineMatch'">Title Detail</title>
+</head>
+<body>
+
+<p><a href="/titles">Back to Library</a></p>
+
+<h1 th:text="${title.name}">Title Name</h1>
+
+<p>
+    <strong>Type:</strong> <span th:text="${title.type}"></span><br/>
+    <strong>Release Year:</strong> <span th:text="${title.releaseYear}"></span><br/>
+    <strong>Genres:</strong>
+    <span th:each="g, iter : ${title.genres}">
+    <span th:text="${g.name}"></span><span th:if="${!iter.last}">, </span>
+  </span>
+</p>
+
+<h2>Rate this title</h2>
+
+<form th:action="@{/titles/{id}/rate(id=${title.id})}" method="post">
+    <label>Score (1–10):</label>
+    <input type="number" name="score" min="1" max="10" required />
+    <button type="submit">Submit Rating</button>
+</form>
+
+<h2>Ratings</h2>
+
+<ul>
+    <li th:if="${#lists.isEmpty(ratings)}">No ratings yet.</li>
+    <li th:each="r : ${ratings}">
+        <span th:text="${r.score}"></span>/10
+        <span th:text="${r.ratedAt}"></span>
+    </li>
+</ul>
+
+</body>
+</html>
