@@ -18,14 +18,14 @@ public class Title {
     @Column(nullable = false)
     private TitleType type;
 
-    private Integer year;
+    private Integer releaseYear;
 
     public Title() {}
 
-    public Title(String name, TitleType type, Integer year) {
+    public Title(String name, TitleType type, Integer releaseYear) {
         this.name = name;
         this.type = type;
-        this.year = year;
+        this.releaseYear = releaseYear;
     }
 
     public Long getId() {
@@ -40,8 +40,8 @@ public class Title {
         return type;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
     public void setName(String name) {
@@ -52,7 +52,7 @@ public class Title {
         this.type = type;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 }
